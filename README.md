@@ -15,8 +15,5 @@ Code used to pre-process the json files of tweets and put into pandas DataFrame/
 **'analysis_code.ipynb'**
 Code used to perform statistical analysis of tweets as processed above (an after the manual addition of 'is_diplomatic binary variable and 'entities_mentioned' string variable. Includes: difference in proportions of diplomatic tweets between users and permutation test, difference in number of unique entities referenced in tweets between users and permutation test, difference in relative frequency of specific diplomatic entity references in diplomatic tweets for each user and permutation test.
   
-**'analysis_code.html'**
-html version of above ipynb file. 
- 
 **'graph_code.Rmd'**
 Code used to create graphs visualizing the data as it relates to the topic of this project. 
