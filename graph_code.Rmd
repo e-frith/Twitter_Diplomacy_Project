@@ -1,0 +1,64 @@
+---
+title: "Twitter Diplomacy Graph Code"
+output: html_notebook
+---
+
+
+# Graph 1: Comparing Proportions of Diplomatic vs. Non-Diplomatic Tweets
+
+```{r}
+# Read in data and create combined dataframe
+entity_data = read.csv('entity_df.csv', header = TRUE)
+
+pompeo_data = read.csv('pompeo.csv', header = TRUE)
+pompeo_data['user'] = 'pompeo' 
+trump_data = read.csv('trump.csv', header = TRUE)
+trump_data['user'] = 'trump'
+
+all_tweets = rbind(pompeo_data,trump_data)
+
+library(ggplot2)
+theme_update(plot.title = element_text(hjust = 0.5))
+
+ggplot(data=all_tweets) +
+  geom_bar(aes(x=user,fill=factor(is_diplomatic)),position = 'fill', width = 0.5)+
+  scale_y_continuous(labels = scales::percent)+
+  labs(title = "Percentage of Diplomatic vs Non-Diplomatic Tweets",fill="Diplomatic Tweet")+
+  xlab('User')+
+  ylab('Percentage')
+
+```
+
+# Graph 2: Number of Unique Diplomatic Entities Mentioned in Tweets for Each User
+```{r}
+unique_entities = c(length(entity_data$entity[entity_data$trump_count>0]),
+                    length(entity_data$entity[entity_data$pompeo_count>0]))
+users = c("Trump","Pompeo")
+graph_data = data.frame(unique_entities,users)
+
+ggplot(data=graph_data, aes(x=users, y=unique_entities))+
+  geom_bar(stat = "identity",fill = '#00BFC4', width = 0.5)+
+  labs(title = 'Unique Diplomatic Entities Referenced per User')+
+  xlab("User")+
+  ylab("Number of Unique Entities Referenced")
+  
+```
+
+# Graph 3: Comparing Proportion of Diplomatic Tweets Referencing Specific Entities for Each User
+```{r}
+# Since have over 100 entiites, only visualize those mentioned at least 4 times by each user:
+entity_sub = entity_data[(entity_data$trump_count>4)&(entity_data$pompeo_count>4),]
+library(reshape2)
+entity_sub = melt(entity_sub, id.vars = "entity", measure.vars = c("trump_prop","pompeo_prop"))
+
+ggplot(data=entity_sub, aes(x=entity, y=value, fill = variable)) +
+  geom_bar(stat="identity", position=position_dodge())+
+  theme(axis.text.x = element_text(angle = 45))+
+  theme(legend.position = c(.95, .95), legend.justification = c("right", "top"),
+        legend.box.just = "right",legend.margin = margin(6, 6, 6, 6))+
+  labs(title = "Proportion of User's Diplomatic Tweets in which Entity is Referenced", fill = 'User')+
+  xlab('Diplomatic Entity')+
+  ylab('Proportion of Tweets')+
+  scale_fill_discrete(labels = c("Trump", "Pompeo"))+
+  theme(legend.title=element_blank())
+```
