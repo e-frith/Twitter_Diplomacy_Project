@@ -17,3 +17,6 @@ Code used to perform statistical analysis of tweets as processed above (an after
   
 **'analysis_code.html'**
 html version of above ipynb file. 
+ 
+**'graph_code.Rmd'**
+Code used to create graphs visualizing the data as it relates to the topic of this project. 
