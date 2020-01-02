@@ -1,7 +1,10 @@
 # Twitter_Diplomacy_Project
 Analysis of use of Twitter Diplomacy by President Trump and Secretary Pompeo. Project conducted jointly for an Applied Statistical Methods course and International Relations Seminar.
 
-## Code Files and Descriptions:
+## Files and Descriptions:
+
+**Twitter Diplomacy Final Project.pdf**
+Project write-up. Description of data, explanation of data processing and analysis steps, graphical summaries of data, and analysis of study results. 
   
 **'trump_tweets_code.py'**
 Code used to request user @realDonaldTrump's timeline from Twitter Developer API, and put raw twitter response into json. Developer keys removed for privacy.
