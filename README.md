@@ -17,6 +17,3 @@ Code used to perform statistical analysis of tweets as processed above (an after
   
 **'graph_code.Rmd'**
 Code used to create graphs visualizing the data as it relates to the topic of this project. 
-
-
-* My code review partner was Maddie Covino. 
